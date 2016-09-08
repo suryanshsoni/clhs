@@ -6,7 +6,7 @@ if(!isloggedin()){
  exit;
 }
 
-    
+
 
 ?>
 
@@ -19,17 +19,17 @@ and open the template in the editor.
 <html>
     <head>
         <meta charset="UTF-8">
-        
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
    <link rel="icon" type="image/ico" href="favicon.ico">
    <!--MDL-->
    <link rel="stylesheet" href="src/css/mdl/material.min.css">
-    
+
 
     <!-- Bootstrap -->
-    
+
     <link href="src/css/bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="src/css/bootstrap-3.3.6-dist/css/bootstrap-next.css" rel="stylesheet">
     <link href="src/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -39,7 +39,7 @@ and open the template in the editor.
     <style>
         .dashboard img {
            display: table;
-           width: 100%;          
+           width: 100%;
         }
         .dashboard .btn {
           width:100%;
@@ -53,7 +53,7 @@ and open the template in the editor.
     </head>
     <body>
         <header>
- 
+
         <div class="navbar navbar-default navbar-inverse navbar-fixed-top" id="mynav">
             <div class="container">
             <div class="navbar-header">
@@ -62,12 +62,12 @@ and open the template in the editor.
                      <span class="icon-bar"></span>
                      <span class="icon-bar"></span>
                 </button>
-                
+
                 <a href="admin_home.php" class="navbar-brand">CricScorer</a>
-                
-            </div> 
+
+            </div>
             <div class="collapse navbar-collapse" id="coll">
-              
+
             <ul class="nav navbar-nav">
                 <li>
                     <a href="" data-toggle="dropdown" class="dropdown-toggle">
@@ -78,10 +78,10 @@ and open the template in the editor.
                         <li class="fade in active"><a href="admin_home.php?option=addplayer">Add Player</a></li>
                         <li><a href="admin_home.php?option=updateplayer">Modify Player Details</a></li>
                         <li><a href="admin_home.php?option=deleteplayer">Delete Player</a></li>
-                        
-                    </ul>    
+
+                    </ul>
                 </li>
-                   
+
                 <li>
                     <a href="" data-toggle="dropdown" class="dropdown-toggle">
                         Manage Accounts
@@ -91,10 +91,10 @@ and open the template in the editor.
                         <li class="fade in active"><a href="admin_home.php?option=addaccount">Create Account</a></li>
                         <li><a href="admin_home.php?option=deleteaccount">Delete Account</a></li>
                         <li><a href="admin_home.php?option=recoverpassword">Password Recovery Request</a></li>
-                        
-                    </ul>    
+
+                    </ul>
                 </li>
-                
+
                 <li>
                     <a href="" data-toggle="dropdown" class="dropdown-toggle">
                         Process Complaint
@@ -103,56 +103,56 @@ and open the template in the editor.
                     <ul class="dropdown-menu">
                         <li class="fade in active"><a href="admin_home.php?option=processhcomplaint">Hostel Complaint</a></li>
                         <li><a href="admin_home.php?option=processrcomplaint">Ragging Complaint</a></li>
-                    </ul>    
+                    </ul>
                 </li>
-               
+
                   <li>
                     <a href="" data-toggle="dropdown" class="dropdown-toggle">
                         Notice Board
                     <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="admin_home.php?option=maintainnotice">Manage Notice Board</a></li> 
+                        <li><a href="admin_home.php?option=maintainnotice">Manage Notice Board</a></li>
                         <li class="active"><a href="admin_home.php?option=noticeboard">View Notice Board</a></li>
-                    </ul>    
+                    </ul>
                 </li>
                 <li>
                     <a href="admin_home.php?option=viewplayer">View player</a>
                 </li>
-                  
+
             </ul>
-             
+
             <ul class="nav navbar-nav navbar-right">
                  <li>
-                     
+
                     <a href="" data-toggle="dropdown" class="dropdown-toggle">
-                    <?php 
+                    <?php
                               if(isloggedin()){
                                    $name=  isloggedin();
                                    $query="select name from users where id=".$name.";";
                                    $name=  mysqli_fetch_assoc(mysqli_query($GLOBALS["___mysqli_ston"], $query));
-                                
+
                                    echo $name['name'];
                               }
                         ?>
                     <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        
+
                         <li><a href="admin_home.php?option=changepass">Change Password</a></li>
                         <li><a href="admin_home.php?option=logout">Logout</a></li>
-                        
-                    </ul>    
-                </li>     
+
+                    </ul>
+                </li>
             </ul>
             </div>
                 </div>
         </div>
-            
+
         </header>
-        
+
         <div class="container" style="margin-top:50px;">
-       <?php 
+       <?php
         @$opt= $_GET['option'];
         if($opt==""){
         ?>
@@ -160,162 +160,233 @@ and open the template in the editor.
              <hr>
             <div class="row-fluid">
               <div id="dashboard" class="container text-center">
-                  <!--panel starts-->
+                <!--league panel starts-->
+                 <div class=" col-lg-6">
+                      <div class=" panel panel-default panel-yellow ">
+                          <div class="panel-heading"><h3 class="panel-title">Leagues</h3></div>
+     <div class="panel-body dashboard ">
+        <div class=" col-lg-4">
+                                         <a href="admin_home.php?option=addaccount">
+                                         <div class=" well ">
+
+                                         <img src="resources/create-account.png" alt=""/>
+                                         </div>
+                                          <button  class="btn btn-primary">Create Series</button></a>
+                                       </div>
+                                     <div class="col-lg-4">
+                                         <a href="admin_home.php?option=deleteaccount">
+                                         <div class="well ">
+                                             <img src="resources/delete-account.png" alt=""/>
+                                             </div>
+                                         <button  class="btn btn-primary">Delete series</button></a>
+                                     </div>
+                                     <div class="col-lg-4">
+                                         <a href="admin_home.php?option=recoverpassword">
+                                         <div class="well" >
+                                             <img src="resources/change-password.png" alt=""/>
+                                             </div>
+                                             <button class="btn btn-primary"><text style="font-size:12px;">Update Series</text></button></a>
+                                     </div>
+     </div>
+                      </div>
+                 </div>
+           <!-- league panel ends-->
+
+           <!--team panel starts-->
+            <div class=" col-lg-6">
+                 <div class=" panel panel-default panel-yellow ">
+                     <div class="panel-heading"><h3 class="panel-title">Teams</h3></div>
+     <div class="panel-body dashboard ">
+        <div class="row-fluid">
+                                  <div class=" col-lg-4">
+                                    <a href="admin_home.php?option=addaccount">
+                                    <div class=" well ">
+
+                                    <img src="resources/create-account.png" alt=""/>
+                                    </div>
+                                     <button  class="btn btn-primary">Upload Teams</button></a>
+                                  </div>
+                                <div class="col-lg-4">
+                                    <a href="admin_home.php?option=deleteaccount">
+                                    <div class="well ">
+                                        <img src="resources/delete-account.png" alt=""/>
+                                        </div>
+                                    <button  class="btn btn-primary">Create Team</button></a>
+                                </div>
+                                <div class="col-lg-4">
+                                    <a href="admin_home.php?option=recoverpassword">
+                                    <div class="well" >
+                                        <img src="resources/change-password.png" alt=""/>
+                                        </div>
+                                        <button class="btn btn-primary"><text style="font-size:12px;">Update Team</text></button></a>
+                                </div>
+              </div>
+              <div class="row">
+                                <div class="col-lg-4">
+                                    <a href="admin_home.php?option=recoverpassword">
+                                    <div class="well" >
+                                        <img src="resources/change-password.png" alt=""/>
+                                        </div>
+                                        <button class="btn btn-primary"><text style="font-size:12px;">Delete Team </text></button></a>
+                                </div>
+
+                               <div class="col-lg-4">
+                                   <a href="admin_home.php?option=recoverpassword">
+                                   <div class="well" >
+                                       <img src="resources/change-password.png" alt=""/>
+                                       </div>
+                                       <button class="btn btn-primary"><text style="font-size:12px;">Copy from previous leagues </text></button></a>
+                              </div>
+
+              </div>
+        </div>
+     </div>
+    </div>
+      <!-- teams panel ends-->
+
+                  <!--players panel starts-->
                     <div class=" col-lg-6">
                          <div class="panel panel-default panel-primary">
-                             <div class="panel-heading"><h3 class="panel-title">Update player Database</h3></div>
+                             <div class="panel-heading"><h3 class="panel-title">Players</h3></h3></div>
 				<div class="panel-body dashboard">
 					 <div class="col-lg-4">
                                             <a href="admin_home.php?option=addplayer">
                                             <div class="well">
                                             <img src="resources/add-player.png" alt=""/>
-                                            </div>   
+                                            </div>
                                               <button  class="btn btn-primary">Add Player</button></a>
                                           </div>
                                         <div class="col-lg-4">
-                                            <a href="admin_home.php?option=updateplayer"> 
+                                            <a href="admin_home.php?option=updateplayer">
                                             <div class="well">
                                                 <img src="resources/shift-change.png" alt=""/>
-                                                </div>   
+                                                </div>
                                           <button  class="btn btn-primary">Modify Player</button></a>
-                                        </div> 
-                                        <div class="col-lg-4"> 
+                                        </div>
+                                        <div class="col-lg-4">
                                             <a href="admin_home.php?option=deleteplayer">
                                             <div class="well">
                                                 <img src="resources/delete-player.png" alt=""/>
-                                     
-                                                </div>   
+
+                                                </div>
                                            <button  class="btn btn-primary">Delete Player</button></a>
                                         </div>
 				</div>
-                         </div>          
+                         </div>
                     </div>
-              <!--panel ends-->      
+              <!--players panel ends-->
                    <!--panel starts-->
                     <div class=" col-lg-6">
                          <div class=" panel panel-default panel-yellow ">
-                             <div class="panel-heading"><h3 class="panel-title">Manage Accounts</h3></div>
+                             <div class="panel-heading"><h3 class="panel-title">Schedule</h3></div>
 				<div class="panel-body dashboard ">
 					 <div class=" col-lg-4">
                                             <a href="admin_home.php?option=addaccount">
                                             <div class=" well ">
-                                                
+
                                             <img src="resources/create-account.png" alt=""/>
-                                            </div>   
-                                             <button  class="btn btn-primary">Create Account</button></a>
+                                            </div>
+                                             <button  class="btn btn-primary">Upload Schedule</button></a>
                                           </div>
-                                        <div class="col-lg-4">  
-                                            <a href="admin_home.php?option=deleteaccount"> 
+                                        <div class="col-lg-4">
+                                            <a href="admin_home.php?option=deleteaccount">
                                             <div class="well ">
                                                 <img src="resources/delete-account.png" alt=""/>
-                                                </div>   
-                                            <button  class="btn btn-primary">Delete account</button></a>
-                                        </div> 
+                                                </div>
+                                            <button  class="btn btn-primary">Create Fixture</button></a>
+                                        </div>
                                         <div class="col-lg-4">
                                             <a href="admin_home.php?option=recoverpassword">
-                                            <div class="well" > 
+                                            <div class="well" >
                                                 <img src="resources/change-password.png" alt=""/>
-                                                </div>   
-                                                <button class="btn btn-primary"><text style="font-size:12px;">Password Requests</text></button></a>
+                                                </div>
+                                                <button class="btn btn-primary"><text style="font-size:12px;">Delete Fixture</text></button></a>
                                         </div>
 				</div>
-                         </div>          
+                         </div>
                     </div>
-              <!--panel ends--> 
-                        
+              <!--panel ends-->
+              <!-- grounds panel starts-->
+               <div class=" col-lg-6">
+                    <div class=" panel panel-default panel-yellow ">
+                        <div class="panel-heading"><h3 class="panel-title">Grounds</h3></div>
+   <div class="panel-body dashboard ">
+      <div class=" col-lg-4">
+                                       <a href="admin_home.php?option=addaccount">
+                                       <div class=" well ">
+
+                                       <img src="resources/create-account.png" alt=""/>
+                                       </div>
+                                        <button  class="btn btn-primary">Add Ground</button></a>
+                                     </div>
+                                   <div class="col-lg-4">
+                                       <a href="admin_home.php?option=deleteaccount">
+                                       <div class="well ">
+                                           <img src="resources/delete-account.png" alt=""/>
+                                           </div>
+                                       <button  class="btn btn-primary">Delete Ground</button></a>
+                                   </div>
+                                   <div class="col-lg-4">
+                                       <a href="admin_home.php?option=recoverpassword">
+                                       <div class="well" >
+                                           <img src="resources/change-password.png" alt=""/>
+                                           </div>
+                                           <button class="btn btn-primary"><text style="font-size:12px;">Update Ground</text></button></a>
+                                   </div>
+   </div>
+                    </div>
+               </div>
+         <!--grounds panel ends-->
+         <!-- umpires panel starts-->
+          <div class=" col-lg-6">
+               <div class=" panel panel-default panel-yellow ">
+                   <div class="panel-heading"><h3 class="panel-title">Umpires</h3></div>
+<div class="panel-body dashboard ">
+ <div class=" col-lg-4">
+                                  <a href="admin_home.php?option=addaccount">
+                                  <div class=" well ">
+
+                                  <img src="resources/create-account.png" alt=""/>
+                                  </div>
+                                   <button  class="btn btn-primary">Add Umpire</button></a>
+                                </div>
+                              <div class="col-lg-4">
+                                  <a href="admin_home.php?option=deleteaccount">
+                                  <div class="well ">
+                                      <img src="resources/delete-account.png" alt=""/>
+                                      </div>
+                                  <button  class="btn btn-primary">Delete Umpire</button></a>
+                              </div>
+                              <div class="col-lg-4">
+                                  <a href="admin_home.php?option=recoverpassword">
+                                  <div class="well" >
+                                      <img src="resources/change-password.png" alt=""/>
+                                      </div>
+                                      <button class="btn btn-primary"><text style="font-size:12px;">Update Umpire</text></button></a>
+                              </div>
+</div>
+               </div>
+          </div>
+    <!--umpires panel ends-->
                 </div>
             </div>
             <!--row ends-->
             <br>
-             <!--next row-->
-             <div class="row-fluid">
-              <div id="dashboard" class="container text-center">
-                  <!--panel starts-->
-                    <div class=" col-lg-6">
-                         <div class="panel panel-default panel-red">
-                             <div class="panel-heading"><h3 class="panel-title">Charge Dues and View Details</h3></div>
-				<div class="panel-body dashboard">
-					 <div class="col-lg-4">
-                                             
-                                            <a href="admin_home.php?option=hostelmessdue">
-                                            <div class="well">
-                                                <img src="resources/hostel.png" alt=""/>
-                                            </div>   
-                                                <button  class="btn btn-primary"><text style="font-size: 12px;">Hostel/Mess Fees</text></button></a>
-                                          </div>
-                                        <div class="col-lg-4">
-                                            <a href="admin_home.php?option=viewplayer">
-                                            <div class="well">
-                                                <img src="resources/view_player.png" alt=""/>
-                                                
-                                                </div>   
-                                        <button  class="btn btn-primary"><text style="font-size: 12px;">View player Details</text></button></a>
-                                        </div> 
-                                        <div class="col-lg-4">
-                                            <a href="admin_home.php?option=otherdue">
-                                            <div class="well">
-                                                
-                                                <img src="resources/other-dues.png" alt=""/>
-                                                </div>   
-                                            <button  class="btn btn-primary">Other dues</button></a>
-                                        </div>
-				</div>
-                         </div>          
-                        
-                    </div>
-              <!--panel ends-->      
-                   <!--panel starts-->
-                   <div class=" col-lg-6">
-                         <div class="panel panel-default panel-green">
-                             <div class="panel-heading"><h3 class="panel-title">Complaints and others</h3></div>
-				<div class="panel-body dashboard">
-                                    <div class="col-lg-4">
-                                            <a href="admin_home.php?option=processhcomplaint">
-                                            <div class="well">
-                                                <img src="resources/complaint.png" alt=""/>
-                                            </div>   
-                                        <button  class="btn btn-primary">Hostel Complaint</button></a>
-                                          </div>
-                                        <div class="col-lg-4"> 
-                                            <a href="admin_home.php?option=processrcomplaint">
-                                            <div class="well">
-                                        
-                                                <img src="resources/ragging.png" alt=""/>
-                                                </div>   
-                                           <button  class="btn btn-primary"><text style="font-size:12px;"> Ragging Complaint</text></button></a>
-                                        </div> 
-                                        <div class="col-lg-4">
-                                            <a href="admin_home.php?option=noticeboard">
-                                            <div class="well">
-                                                <img src="resources/notice.png" alt=""/>
-                                                
-                                                </div>   
-                                            <button  class="btn btn-primary"> Notice Board</button></a>
-                                        </div>
-				</div>
-                         </div>          
-                    </div>           
-                   
-              <!--panel ends--> 
-                               
 
-                        
-                </div>
-            </div><!--row ends-->
                 <?php
         }
         else{
             switch($opt){
             case 'logout':
             {
-                    
+
                     $id=  isloggedin();
                     $query="delete from active_users where user=".$id.";";
                     //print("<br><br><br><br><br><br><br>".$query);
                     mysqli_query($GLOBALS["___mysqli_ston"], $query);
                     header("Location: ./index.php");
                     session_destroy();
-                   
+
             }
             break;
             case 'noticeboard':{
@@ -323,16 +394,16 @@ and open the template in the editor.
             }
             break;
             case 'maintainnotice':{
-                require 'editnoticeboard.php';                
+                require 'editnoticeboard.php';
             }break;
             case 'changepass':{
-                require 'changepass.php';                
+                require 'changepass.php';
             }break;
             case 'addplayer':{
-                require 'addplayer.php';                
+                require 'addplayer.php';
             }break;
             case 'updateplayer':{
-                require 'searchplayer.php';                
+                require 'searchplayer.php';
             }break;
             case 'modifyplayer':{
                     require 'modifyplayer.php';
@@ -365,7 +436,7 @@ and open the template in the editor.
             }break;
             case 'viewplayer':{
                 require 'searchplayer.php';
-                
+
             }break;
             case 'displayplayer':{
                     require 'displayplayer.php';
@@ -381,9 +452,9 @@ and open the template in the editor.
         ob_end_flush();
        ?>
             </div>
-      <?php 
+      <?php
       require 'footer.php';
       ?>
-   
+
     </body>
 </html>
