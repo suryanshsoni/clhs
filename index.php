@@ -72,20 +72,20 @@ and open the template in the editor.
                 die("Error: Enter the username");
             else if(!isset($_POST['password']))
                  die("Error: Enter the password");
-           $query=("select id from users where username='".mysql_real_escape_string($_POST['username'])."' and password ='".mysql_real_escape_string(sha1($_POST['password']))."';");
+           $query=("select id from users where username='".((isset($GLOBALS["___mysqli_ston"]) && is_object($GLOBALS["___mysqli_ston"])) ? mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['username']) : ((trigger_error("[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.", E_USER_ERROR)) ? "" : ""))."' and password ='".((isset($GLOBALS["___mysqli_ston"]) && is_object($GLOBALS["___mysqli_ston"])) ? mysqli_real_escape_string($GLOBALS["___mysqli_ston"], sha1($_POST['password'])) : ((trigger_error("[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.", E_USER_ERROR)) ? "" : ""))."';");
             
           // print($query);
           // print(sha1($_POST['password']));
-           $execquery=  mysql_query($query);
-           if(mysql_num_rows($execquery)){
+           $execquery=  mysqli_query($GLOBALS["___mysqli_ston"], $query);
+           if(mysqli_num_rows($execquery)){
                
-                $sessid= mysql_real_escape_string(session_id());
-                $hash=  mysql_real_escape_string(hash("sha512",$sessid.$_SERVER['HTTP_USER_AGENT']));
-                $userdata = mysql_fetch_assoc(mysql_query($query));
+                $sessid= ((isset($GLOBALS["___mysqli_ston"]) && is_object($GLOBALS["___mysqli_ston"])) ? mysqli_real_escape_string($GLOBALS["___mysqli_ston"], session_id()) : ((trigger_error("[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.", E_USER_ERROR)) ? "" : ""));
+                $hash=  ((isset($GLOBALS["___mysqli_ston"]) && is_object($GLOBALS["___mysqli_ston"])) ? mysqli_real_escape_string($GLOBALS["___mysqli_ston"], hash("sha512",$sessid.$_SERVER['HTTP_USER_AGENT'])) : ((trigger_error("[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.", E_USER_ERROR)) ? "" : ""));
+                $userdata = mysqli_fetch_assoc(mysqli_query($GLOBALS["___mysqli_ston"], $query));
                 $expires=time()+(15*60);
                 $query2 ="insert into active_users(user,session_id,hash,expires) values('".$userdata['id']."','".$sessid."','".$hash."',".$expires.");" ;
                 //print($query2);
-                mysql_query($query2);
+                mysqli_query($GLOBALS["___mysqli_ston"], $query2);
 //                
                 //print("logged in successfilly");
                 header ("Location: ./admin_home.php");
