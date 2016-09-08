@@ -1,14 +1,14 @@
 <?php
 if(isset($_POST['addnewplayerbtn'])){
-    $name=  mysql_real_escape_string($_POST['name']);
-    $dob=  mysql_real_escape_string($_POST['date']);
+    $name=  ((isset($GLOBALS["___mysqli_ston"]) && is_object($GLOBALS["___mysqli_ston"])) ? mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['name']) : ((trigger_error("[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.", E_USER_ERROR)) ? "" : ""));
+    $dob=  ((isset($GLOBALS["___mysqli_ston"]) && is_object($GLOBALS["___mysqli_ston"])) ? mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['date']) : ((trigger_error("[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.", E_USER_ERROR)) ? "" : ""));
   
-    $battingstyle=mysql_real_escape_string($_POST['battingstyle']);
-    $bowlingstyle=mysql_real_escape_string($_POST['bowlingstyle']);
+    $battingstyle=((isset($GLOBALS["___mysqli_ston"]) && is_object($GLOBALS["___mysqli_ston"])) ? mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['battingstyle']) : ((trigger_error("[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.", E_USER_ERROR)) ? "" : ""));
+    $bowlingstyle=((isset($GLOBALS["___mysqli_ston"]) && is_object($GLOBALS["___mysqli_ston"])) ? mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['bowlingstyle']) : ((trigger_error("[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.", E_USER_ERROR)) ? "" : ""));
     
     $query = "INSERT INTO players (p_name,p_dob,p_batting_style,p_bowling_style) VALUES ('".$name."','".$dob."','".$battingstyle."','".$bowlingstyle."'".");";
     print($query);
-    mysql_query($query);  
+    mysqli_query($GLOBALS["___mysqli_ston"], $query);  
 ?>
                     <h3> <span class="label label-success">
                         <icon class="fa fa-check-circle"></icon>
@@ -92,14 +92,13 @@ if(isset($_POST['canceladdplayerbtn'])){
                                      <option>Right Hand Fast</option>
                                      <option>Right Hand Slow</option>
                                      <option>Right Hand Medium</option>
-                                     <option>Right Hand Spin</option>
-                                     <option>Right Hand Swing</option>
+                                     <option>Right Hand Off Spin</option>
+                                     <option>Right Hand Leg Spin</option>
                                      <option>Left Hand Fast</option>
                                      <option>Left Hand Slow</option>
                                      <option>Left Hand Medium</option>
-                                     <option>Left Hand Spin</option>
-                                     <option>Left Hand Swing</option>
-                                 </select>
+                                     <option>Left Hand  Off Spin</option>
+                                  </select>
                             </div>
         
                                 

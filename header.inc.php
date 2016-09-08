@@ -5,21 +5,21 @@ require 'config.php';
 $user=  isloggedin();
 if($user){
     $expires=  time()+60*15;
-    mysql_query("update active_users set expires ='".$expires."' where user=".$user.";");  
+    mysqli_query($GLOBALS["___mysqli_ston"], "update active_users set expires ='".$expires."' where user=".$user.";");  
  
 }
 function isloggedin(){
     
-    $sessid = mysql_real_escape_string(session_id());
-    $hash=  mysql_real_escape_string(hash("sha512",$sessid.$_SERVER['HTTP_USER_AGENT']));
+    $sessid = mysqli_real_escape_string($GLOBALS["___mysqli_ston"],session_id());
+    $hash=  mysqli_real_escape_string($GLOBALS["___mysqli_ston"],hash("sha512",$sessid.$_SERVER['HTTP_USER_AGENT']));
         
    $query="select user from active_users where session_id='".$sessid."' and hash='".$hash."' and expires >'".  time()."';";
    //print($query);
-   $exec_query=  mysql_query($query);
+   $exec_query=  mysqli_query($GLOBALS["___mysqli_ston"], $query);
    if($exec_query===false)
-       print "Error is ".mysql_error ();
-   if(mysql_num_rows($exec_query)){
-       $data=  mysql_fetch_assoc($exec_query);
+       print "Error is ".((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false));
+   if(mysqli_num_rows($exec_query)){
+       $data=  mysqli_fetch_assoc($exec_query);
       return $data['user'];
       
    }else
@@ -30,8 +30,8 @@ function isloggedin(){
 function getuserdetails(){
    $user=  isloggedin();
     if($user){
-    $query=mysql_query("select * from users where id=".(int) $user.";");
-    return mysql_fetch_assoc($query);
+    $query=mysqli_query($GLOBALS["___mysqli_ston"], "select * from users where id=".(int) $user.";");
+    return mysqli_fetch_assoc($query);
     
     }
     else
@@ -40,8 +40,8 @@ function getuserdetails(){
 function getuser(){
     $user=  isloggedin();
     if($user){
-    $query=mysql_query("select name,password from users where id=".(int) $user.";");
-    return mysql_fetch_assoc($query);
+    $query=mysqli_query($GLOBALS["___mysqli_ston"], "select name,password from users where id=".(int) $user.";");
+    return mysqli_fetch_assoc($query);
     
     }
     else
@@ -53,7 +53,7 @@ function getuser(){
 function getstudent($name){
    $query= "select *from students where name like '%".$name."%' or roomno like '%".$name."%';";
    //echo $query;
-   $query=mysql_query($query);
+   $query=mysqli_query($GLOBALS["___mysqli_ston"], $query);
    return $query;
 }
 

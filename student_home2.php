@@ -2,7 +2,8 @@
 ob_start();
 require("header.inc.php");
 if(!isloggedin()){
- header ("Location: ./index.php");
+  print 'not logged in';  
+header ("Location: ./index.php");
  exit;
 }
 
@@ -25,16 +26,17 @@ and open the template in the editor.
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
    <link rel="icon" type="image/ico" href="favicon.ico">
    <!--MDL-->
-   <link rel="stylesheet" href="src/css/mdl/material.min.css">
+   <link rel="stylesheet" href="mdl/material.min.css">
     
 
     <!-- Bootstrap -->
     
-    <link href="src/css/bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="src/css/bootstrap-3.3.6-dist/css/bootstrap-next.css" rel="stylesheet">
-    <link href="src/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bootstrap-3.3.6-dist/css/bootstrap-next.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <title>
-      League Administrator
+        Student Dashboard
+        
     </title>
     <style>
         .dashboard img {
@@ -63,7 +65,7 @@ and open the template in the editor.
                      <span class="icon-bar"></span>
                 </button>
                 
-                <a href="admin_home.php" class="navbar-brand">CricScorer</a>
+                <a href="admin_home.php" class="navbar-brand">Lazarus</a>
                 
             </div> 
             <div class="collapse navbar-collapse" id="coll">
@@ -71,13 +73,13 @@ and open the template in the editor.
             <ul class="nav navbar-nav">
                 <li>
                     <a href="" data-toggle="dropdown" class="dropdown-toggle">
-                        Add/Modify players
+                        Add/Modify Students
                     <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li class="fade in active"><a href="admin_home.php?option=addplayer">Add Player</a></li>
-                        <li><a href="admin_home.php?option=updateplayer">Modify Player Details</a></li>
-                        <li><a href="admin_home.php?option=deleteplayer">Delete Player</a></li>
+                        <li class="fade in active"><a href="admin_home.php?option=addstudent">Add Student</a></li>
+                        <li><a href="admin_home.php?option=updatestudent">Modify Student Details</a></li>
+                        <li><a href="admin_home.php?option=deletestudent">Delete Student</a></li>
                         
                     </ul>    
                 </li>
@@ -117,7 +119,7 @@ and open the template in the editor.
                     </ul>    
                 </li>
                 <li>
-                    <a href="admin_home.php?option=viewplayer">View player</a>
+                    <a href="admin_home.php?option=viewstudent">View Student</a>
                 </li>
                   
             </ul>
@@ -129,11 +131,15 @@ and open the template in the editor.
                     <?php 
                               if(isloggedin()){
                                    $name=  isloggedin();
-                                   $query="select name from users where id=".$name.";";
+                                   $query="select name,type from users where id=".$name.";";
                                    $name=  mysqli_fetch_assoc(mysqli_query($GLOBALS["___mysqli_ston"], $query));
-                                
+                                   if($name['type']=="admin"){
+                                       header("Location: ./admin_home.php");
+                                       die;
+                                   }
                                    echo $name['name'];
                               }
+                    
                         ?>
                     <span class="caret"></span>
                     </a>
@@ -163,29 +169,29 @@ and open the template in the editor.
                   <!--panel starts-->
                     <div class=" col-lg-6">
                          <div class="panel panel-default panel-primary">
-                             <div class="panel-heading"><h3 class="panel-title">Update player Database</h3></div>
+                             <div class="panel-heading"><h3 class="panel-title">Update Student Database</h3></div>
 				<div class="panel-body dashboard">
 					 <div class="col-lg-4">
-                                            <a href="admin_home.php?option=addplayer">
+                                            <a href="admin_home.php?option=addstudent">
                                             <div class="well">
-                                            <img src="resources/add-player.png" alt=""/>
+                                            <img src="resources/add-student.png" alt=""/>
                                             </div>   
-                                              <button  class="btn btn-primary">Add Player</button></a>
+                                              <button  class="btn btn-primary">Add New Student</button></a>
                                           </div>
                                         <div class="col-lg-4">
-                                            <a href="admin_home.php?option=updateplayer"> 
+                                            <a href="admin_home.php?option=updatestudent"> 
                                             <div class="well">
                                                 <img src="resources/shift-change.png" alt=""/>
                                                 </div>   
-                                          <button  class="btn btn-primary">Modify Player</button></a>
+                                          <button  class="btn btn-primary">Modify Student</button></a>
                                         </div> 
                                         <div class="col-lg-4"> 
-                                            <a href="admin_home.php?option=deleteplayer">
+                                            <a href="admin_home.php?option=deletestudent">
                                             <div class="well">
-                                                <img src="resources/delete-player.png" alt=""/>
+                                                <img src="resources/delete-student.png" alt=""/>
                                      
                                                 </div>   
-                                           <button  class="btn btn-primary">Delete Player</button></a>
+                                           <button  class="btn btn-primary">Delete Student</button></a>
                                         </div>
 				</div>
                          </div>          
@@ -244,12 +250,12 @@ and open the template in the editor.
                                                 <button  class="btn btn-primary"><text style="font-size: 12px;">Hostel/Mess Fees</text></button></a>
                                           </div>
                                         <div class="col-lg-4">
-                                            <a href="admin_home.php?option=viewplayer">
+                                            <a href="admin_home.php?option=viewstudent">
                                             <div class="well">
-                                                <img src="resources/view_player.png" alt=""/>
+                                                <img src="resources/view_student.png" alt=""/>
                                                 
                                                 </div>   
-                                        <button  class="btn btn-primary"><text style="font-size: 12px;">View player Details</text></button></a>
+                                        <button  class="btn btn-primary"><text style="font-size: 12px;">View Student Details</text></button></a>
                                         </div> 
                                         <div class="col-lg-4">
                                             <a href="admin_home.php?option=otherdue">
@@ -328,24 +334,24 @@ and open the template in the editor.
             case 'changepass':{
                 require 'changepass.php';                
             }break;
-            case 'addplayer':{
-                require 'addplayer.php';                
+            case 'addstudent':{
+                require 'addstudent.php';                
             }break;
-            case 'updateplayer':{
-                require 'searchplayer.php';                
+            case 'updatestudent':{
+                require 'searchstudent.php';                
             }break;
-            case 'modifyplayer':{
-                    require 'modifyplayer.php';
+            case 'modifystudent':{
+                    require 'modifystudent.php';
             }
             break;
-            case 'deleteplayer':{
-                    require 'searchplayer.php';
+            case 'deletestudent':{
+                    require 'searchstudent.php';
             }break;
-            case 'removeplayer':{
-                    require 'deleteplayer.php';
+            case 'removestudent':{
+                    require 'deletestudent.php';
             }break;
             case 'addaccount':{
-                    require 'searchplayer.php';
+                    require 'searchstudent.php';
             } break;
             case 'createaccount':{
                     require 'addaccount.php';
@@ -363,18 +369,12 @@ and open the template in the editor.
             case 'hostelmessdue':{
                 require 'hmdues.php';
             }break;
-            case 'viewplayer':{
-                require 'searchplayer.php';
+            case 'viewstudent':{
+                require 'searchstudent.php';
                 
             }break;
-            case 'displayplayer':{
-                    require 'displayplayer.php';
-            }break;
-            case 'processhcomplaint':{
-                    require 'viewhcomplaint.php';
-            }break;
-            case 'processrcomplaint':{
-                    require 'viewmcomplaint.php';
+            case 'displaystudent':{
+                    require 'displaystudent.php';
             }break;
         }
         }

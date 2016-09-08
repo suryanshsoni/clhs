@@ -1,16 +1,15 @@
 <?php
-$path="localhost:3309";
-$username="root";
-$password="leopard";
-$dbname="clhs";
+$localhost="localhost:3306";
+$dbusername="root";
+$dbpass="leopard";
+$db="clhs";
 
-$dbconn=  mysql_connect($path,$username,$password);
+$conn=($GLOBALS["___mysqli_ston"] = mysqli_connect("$localhost",  "$dbusername",  "$dbpass", "$db", "3306")) or die ('Cannot connect to the database because: ' . ((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false)));
 
-if($dbconn){
+
+if($conn){
   
-    mysql_select_db($dbname);
-    
-    //echo "connection successful";
+   //echo "connection successful";
 }
 else
     die("<strong>connection failed<strong>");
