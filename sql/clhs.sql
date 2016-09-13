@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 08, 2016 at 09:30 PM
+-- Generation Time: Sep 13, 2016 at 07:02 PM
 -- Server version: 10.1.16-MariaDB
 -- PHP Version: 7.0.9
 
@@ -39,11 +39,10 @@ CREATE TABLE `active_users` (
 --
 
 INSERT INTO `active_users` (`id`, `user`, `session_id`, `hash`, `expires`) VALUES
-(4, 1, 'tk3fo7c2apd8s5uimmnlsoto21', 'a631edc91d4641ed5e46e935e71c699bb9a6943193158338c0d9b0464afac16e0e9a816e2296f74b9cd0e26d7846ebe8a3d031988753c3310726ec3cfd830afb', 1473363887),
-(5, 1, '3av9ctlffj6mmoeferphigm903', '37eb9c204f28c89d823dd7069075f48b3d2358d4d967df257f58fdb831c0248390b0ad6f3e5f3a60afd99abac4d1821482bdd9f6fba0ae6b0d192fc26d1e8e38', 1473363887),
-(6, 1, 'ga5up2te8flbtg71l34pkd7li7', 'd8a30b694d7ef6271be8b59acc141b47ce98be0c08ea9b500f37aa4f6e33cf0588150a7f18a8c418791cac4551dc61500e8b0c4be0fb4bc0e36ea23602da46f2', 1473363887),
-(7, 1, 'ga5up2te8flbtg71l34pkd7li7', 'd8a30b694d7ef6271be8b59acc141b47ce98be0c08ea9b500f37aa4f6e33cf0588150a7f18a8c418791cac4551dc61500e8b0c4be0fb4bc0e36ea23602da46f2', 1473363887),
-(8, 1, 'ga5up2te8flbtg71l34pkd7li7', 'd8a30b694d7ef6271be8b59acc141b47ce98be0c08ea9b500f37aa4f6e33cf0588150a7f18a8c418791cac4551dc61500e8b0c4be0fb4bc0e36ea23602da46f2', 1473363887);
+(3, 1, '9bkc6onsl3tb49iuh1je9phtc3', 'b8dbf0247a28e4a6556d93c43a7bc1c99e48e633fc40abdb98f94b21884b0680736cea689982aa6457113bd62cdd9fa1d4e7cad0e4732d69a4721c8858ab872f', 1473787007),
+(4, 1, '9bkc6onsl3tb49iuh1je9phtc3', 'b8dbf0247a28e4a6556d93c43a7bc1c99e48e633fc40abdb98f94b21884b0680736cea689982aa6457113bd62cdd9fa1d4e7cad0e4732d69a4721c8858ab872f', 1473787007),
+(5, 1, '9bkc6onsl3tb49iuh1je9phtc3', 'b8dbf0247a28e4a6556d93c43a7bc1c99e48e633fc40abdb98f94b21884b0680736cea689982aa6457113bd62cdd9fa1d4e7cad0e4732d69a4721c8858ab872f', 1473787007),
+(6, 1, '9bkc6onsl3tb49iuh1je9phtc3', 'b8dbf0247a28e4a6556d93c43a7bc1c99e48e633fc40abdb98f94b21884b0680736cea689982aa6457113bd62cdd9fa1d4e7cad0e4732d69a4721c8858ab872f', 1473787007);
 
 -- --------------------------------------------------------
 
@@ -124,13 +123,22 @@ CREATE TABLE `grounds` (
   `g_country` varchar(40) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `grounds`
+--
+
+INSERT INTO `grounds` (`g_id`, `g_name`, `g_city`, `g_country`) VALUES
+(2, 'Wankhede', 'Mumbai', 'India'),
+(3, 'Lords', 'London', 'England'),
+(5, 'Holkar', 'Indore', 'India');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `league`
+-- Table structure for table `leagues`
 --
 
-CREATE TABLE `league` (
+CREATE TABLE `leagues` (
   `l_id` int(11) NOT NULL,
   `l_name` varchar(40) DEFAULT NULL,
   `l_winner` varchar(40) DEFAULT NULL,
@@ -138,8 +146,17 @@ CREATE TABLE `league` (
   `l_fours` int(11) DEFAULT NULL,
   `l_wickets` int(11) DEFAULT NULL,
   `l_overs` int(11) DEFAULT NULL,
+  `l_start_date` date NOT NULL,
+  `l_win_points` int(11) NOT NULL,
   `l_user_id` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `leagues`
+--
+
+INSERT INTO `leagues` (`l_id`, `l_name`, `l_winner`, `l_sixes`, `l_fours`, `l_wickets`, `l_overs`, `l_start_date`, `l_win_points`, `l_user_id`) VALUES
+(4, 'kl', NULL, NULL, NULL, NULL, 16, '9877-06-05', 5, NULL);
 
 -- --------------------------------------------------------
 
@@ -158,16 +175,18 @@ CREATE TABLE `players` (
   `p_average` decimal(10,0) DEFAULT '0',
   `p_batting_style` varchar(40) DEFAULT NULL,
   `p_bowling_style` varchar(40) DEFAULT NULL,
-  `p_team_id` int(11) DEFAULT NULL
+  `p_team_id` int(11) DEFAULT NULL,
+  `p_league_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `players`
 --
 
-INSERT INTO `players` (`p_id`, `p_name`, `p_dob`, `p_runs`, `p_wickets`, `p_strike_rate`, `p_economy`, `p_average`, `p_batting_style`, `p_bowling_style`, `p_team_id`) VALUES
-(1, 'Sachin Tendulkar', '1985-09-27', 0, 0, '0', '0', '0', '', '', NULL),
-(2, 'Virat Kohli', '1548-08-05', 0, 0, '0', '0', '0', 'Right Hand Batsman', 'Right Hand Fast', NULL);
+INSERT INTO `players` (`p_id`, `p_name`, `p_dob`, `p_runs`, `p_wickets`, `p_strike_rate`, `p_economy`, `p_average`, `p_batting_style`, `p_bowling_style`, `p_team_id`, `p_league_id`) VALUES
+(1, 'Sachin Tendulkar', '1978-09-07', 0, 0, '0', '0', '0', 'Right Hand Batsman', 'Right Hand Leg Spin', NULL, 0),
+(2, 'Virat Kohli', '1298-02-25', 0, 0, '0', '0', '0', 'Right Hand Batsman', 'Left Hand Medium', NULL, 0),
+(3, 'Akshay Vyas', '1995-02-05', 0, 0, '0', '0', '0', 'Right Hand Batsman', 'Right Hand Slow', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -206,6 +225,13 @@ CREATE TABLE `umpires` (
   `u_name` varchar(40) DEFAULT NULL,
   `u_experience` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `umpires`
+--
+
+INSERT INTO `umpires` (`u_id`, `u_name`, `u_experience`) VALUES
+(2, 'Simon Tafuel', 31);
 
 -- --------------------------------------------------------
 
@@ -269,9 +295,9 @@ ALTER TABLE `grounds`
   ADD PRIMARY KEY (`g_id`);
 
 --
--- Indexes for table `league`
+-- Indexes for table `leagues`
 --
-ALTER TABLE `league`
+ALTER TABLE `leagues`
   ADD PRIMARY KEY (`l_id`);
 
 --
@@ -313,12 +339,27 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `active_users`
 --
 ALTER TABLE `active_users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT for table `grounds`
+--
+ALTER TABLE `grounds`
+  MODIFY `g_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `leagues`
+--
+ALTER TABLE `leagues`
+  MODIFY `l_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `players`
 --
 ALTER TABLE `players`
-  MODIFY `p_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `p_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `umpires`
+--
+ALTER TABLE `umpires`
+  MODIFY `u_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `users`
 --
