@@ -3,20 +3,25 @@
 if(isset($_POST['search_donebtn'])){
     echo $opt;
     switch($opt){
-        case 'updatestudent':{
-          //  echo 'student update go'." ".$_POST['selected_student'];
-         header ("Location: ./admin_home.php?option=modifystudent&student=".$_POST['selected_student']);
+        case 'updateleague':{
+          //  echo 'league update go'." ".$_POST['selected_league'];
+         header ("Location: ./admin_home.php?option=modifyleague&league=".$_POST['selected_league']);
         }break;
-        case 'deletestudent':{
-          //  echo 'student update go'." ".$_POST['selected_student'];
-         header ("Location: ./admin_home.php?option=removestudent&student=".$_POST['selected_student']);
+        case 'deleteleague':{
+          //  echo 'league update go'." ".$_POST['selected_league'];
+         header ("Location: ./admin_home.php?option=removeleague&league=".$_POST['selected_league']);
+        }break;
+        
+        case 'viewleague':{
+            header ("Location: ./admin_home.php?option=displayleague&league=".$_POST['selected_league']);
+            
         }break;
     }
     die;
 }
 ?>
 
-<h1 class="container text-center" style="margin-top:30px;">Select student</h1>
+<h1 class="container text-center" style="margin-top:30px;">Select league</h1>
 
              <hr>
              
@@ -26,21 +31,18 @@ if(isset($_POST['search_donebtn'])){
                     
                     <form  method="post" class="form-inline">
 		    <div class="form-group"> 
-                         <strong>Enter Name Or Room Number</strong>
-                          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                            <input class="mdl-textfield__input" type="text" id="sample3">
-                            <label class="mdl-textfield__label" for="sample3">Text...</label>
-                           </div>
+                         <strong>Enter League's Name</strong>
+                         
+                    <input type="text" class="form-control" name="searchterm" placeholder="League's Name ">
                     </div>
-				<button type="submit" name="searchstudentbtn" class="btn btn-primary">Search </button>
+				<button type="submit" name="searchleaguebtn" class="btn btn-primary">Search </button>
 		    </form>
                      <?php
-                     if(isset($_POST['searchstudentbtn'])){
+                     if(isset($_POST['searchleaguebtn'])){
                         
-                         $searchname=   mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['searchterm']) ;
-                         
-                         $studentquery=  getstudent($searchname);
-                         if(mysqli_num_rows($studentquery)){
+                         $searchname=   mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['searchterm']);
+                         $leaguequery=  getleague($searchname);
+                         if(mysqli_num_rows($leaguequery)){
                          ?>
                  </div>
                             <br><br>
@@ -51,37 +53,32 @@ if(isset($_POST['search_donebtn'])){
 				<table  class="table table-striped table-bordered table-condensed">
                                   <thead class="thead-inverse">
                                     <tr>
-                                      <th style="width:20%">Enrollment Number</th>
-                                      <th style="width:20%">Name</th>
-                                      <th style="width:20%">Room Number</th>
-                                      <th style="width:20%">Branch</th>
-                                      <th style="width:20%">Year</th>
+                                      <th style="width:10%"></th>
+                                      <th style="width:45%">League Name</th>
+                                      <th style="width:45%">Start Date</th>
+                                      
+                                      
                                     </tr>
                                   </thead>
                                   <tbody>
                          <?php
-                            while($student=  mysqli_fetch_assoc($studentquery)){
-                             $student_name=$student['Name'];
-                             $roomno=$student['roomno'];
-                             $branch=$student['branch'];
-                             $year=$student['current_year'];
-                             $enroll=$student['enrollmentno'];
-                           
-                     
-                            ?>
+                            while($league=  mysqli_fetch_assoc($leaguequery)){
+                             $league_id=$league['l_id'];
+                             $league_name=$league['l_name'];
+                             $start=$league['l_start_date'];
+                           ?>
                                       <tr>
                                         <td class="text-left">
-                                             <div class="radio-inline">
+                                             <div class="radio-inline" >
                                                     <label>
-                                                   <input type="radio" checked value="<?php echo $enroll?>" name="selected_student">
-                                                    <?php echo $enroll ?>
+                                                   <input type="radio" style="margin-top :-6px;" value="<?php echo $league_id?>" name="selected_league" checked >
                                                     </label>
                                                         </div>
                                         </td>
-                                      <td><?php echo $student_name ?></td>
-                                      <td><?php echo $roomno ?></td>
-                                      <td><?php echo $branch?></td>
-                                      <td><?php echo $year ?></td>
+                                      <td><?php echo $league_name ?></td>
+                                      <td><?php echo $start ?></td>
+                                      
+                                  
                                     </tr>
                             <?php
                                   }?>

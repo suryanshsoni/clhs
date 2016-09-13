@@ -3,20 +3,25 @@
 if(isset($_POST['search_donebtn'])){
     echo $opt;
     switch($opt){
-        case 'updatestudent':{
-          //  echo 'student update go'." ".$_POST['selected_student'];
-         header ("Location: ./admin_home.php?option=modifystudent&student=".$_POST['selected_student']);
+        case 'updateground':{
+          //  echo 'ground update go'." ".$_POST['selected_ground'];
+         header ("Location: ./admin_home.php?option=modifyground&ground=".$_POST['selected_ground']);
         }break;
-        case 'deletestudent':{
-          //  echo 'student update go'." ".$_POST['selected_student'];
-         header ("Location: ./admin_home.php?option=removestudent&student=".$_POST['selected_student']);
+        case 'deleteground':{
+          //  echo 'ground update go'." ".$_POST['selected_ground'];
+         header ("Location: ./admin_home.php?option=removeground&ground=".$_POST['selected_ground']);
+        }break;
+        
+        case 'viewground':{
+            header ("Location: ./admin_home.php?option=displayground&ground=".$_POST['selected_ground']);
+            
         }break;
     }
     die;
 }
 ?>
 
-<h1 class="container text-center" style="margin-top:30px;">Select student</h1>
+<h1 class="container text-center" style="margin-top:30px;">Select ground</h1>
 
              <hr>
              
@@ -26,21 +31,18 @@ if(isset($_POST['search_donebtn'])){
                     
                     <form  method="post" class="form-inline">
 		    <div class="form-group"> 
-                         <strong>Enter Name Or Room Number</strong>
-                          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                            <input class="mdl-textfield__input" type="text" id="sample3">
-                            <label class="mdl-textfield__label" for="sample3">Text...</label>
-                           </div>
+                         <strong>Enter Ground's Name</strong>
+                         
+                    <input type="text" class="form-control" name="searchterm" placeholder="Ground's Name ">
                     </div>
-				<button type="submit" name="searchstudentbtn" class="btn btn-primary">Search </button>
+				<button type="submit" name="searchgroundbtn" class="btn btn-primary">Search </button>
 		    </form>
                      <?php
-                     if(isset($_POST['searchstudentbtn'])){
+                     if(isset($_POST['searchgroundbtn'])){
                         
-                         $searchname=   mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['searchterm']) ;
-                         
-                         $studentquery=  getstudent($searchname);
-                         if(mysqli_num_rows($studentquery)){
+                         $searchname=   mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['searchterm']);
+                         $groundquery=  getground($searchname);
+                         if(mysqli_num_rows($groundquery)){
                          ?>
                  </div>
                             <br><br>
@@ -51,37 +53,34 @@ if(isset($_POST['search_donebtn'])){
 				<table  class="table table-striped table-bordered table-condensed">
                                   <thead class="thead-inverse">
                                     <tr>
-                                      <th style="width:20%">Enrollment Number</th>
-                                      <th style="width:20%">Name</th>
-                                      <th style="width:20%">Room Number</th>
-                                      <th style="width:20%">Branch</th>
-                                      <th style="width:20%">Year</th>
+                                      <th style="width:25%">Ground ID</th>
+                                      <th style="width:25%">Ground Name</th>
+                                      <th style="width:25%">City</th>
+                                      <th style="width:25%">Country</th>
+                                      
                                     </tr>
                                   </thead>
                                   <tbody>
                          <?php
-                            while($student=  mysqli_fetch_assoc($studentquery)){
-                             $student_name=$student['Name'];
-                             $roomno=$student['roomno'];
-                             $branch=$student['branch'];
-                             $year=$student['current_year'];
-                             $enroll=$student['enrollmentno'];
-                           
-                     
-                            ?>
+                            while($ground=  mysqli_fetch_assoc($groundquery)){
+                             $ground_name=$ground['g_name'];
+                             $city=$ground['g_city'];
+                             $country=$ground['g_country'];
+                             $ground_id=$ground['g_id']
+                           ?>
                                       <tr>
                                         <td class="text-left">
                                              <div class="radio-inline">
                                                     <label>
-                                                   <input type="radio" checked value="<?php echo $enroll?>" name="selected_student">
-                                                    <?php echo $enroll ?>
+                                                   <input type="radio" checked value="<?php echo $ground_id?>" name="selected_ground">
+                                                    <?php echo $ground_id ?>
                                                     </label>
                                                         </div>
                                         </td>
-                                      <td><?php echo $student_name ?></td>
-                                      <td><?php echo $roomno ?></td>
-                                      <td><?php echo $branch?></td>
-                                      <td><?php echo $year ?></td>
+                                      <td><?php echo $ground_name ?></td>
+                                      <td><?php echo $city ?></td>
+                                      <td><?php echo $country ?></td>
+                                  
                                     </tr>
                             <?php
                                   }?>

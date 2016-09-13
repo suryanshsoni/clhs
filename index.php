@@ -19,6 +19,7 @@ and open the template in the editor.
         
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="google-signin-client_id" content="668791001514-nk241ksbt17t0g5iksij3p3phspocgru.apps.googleusercontent.com">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <link rel="icon" type="image/ico" href="favicon.ico">
 
@@ -72,15 +73,15 @@ and open the template in the editor.
                 die("Error: Enter the username");
             else if(!isset($_POST['password']))
                  die("Error: Enter the password");
-           $query=("select id from users where username='".((isset($GLOBALS["___mysqli_ston"]) && is_object($GLOBALS["___mysqli_ston"])) ? mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['username']) : ((trigger_error("[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.", E_USER_ERROR)) ? "" : ""))."' and password ='".((isset($GLOBALS["___mysqli_ston"]) && is_object($GLOBALS["___mysqli_ston"])) ? mysqli_real_escape_string($GLOBALS["___mysqli_ston"], sha1($_POST['password'])) : ((trigger_error("[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.", E_USER_ERROR)) ? "" : ""))."';");
+           $query=("select id from users where username='". mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['username']) ."' and password ='". mysqli_real_escape_string($GLOBALS["___mysqli_ston"], sha1($_POST['password'])) ."';");
             
           // print($query);
           // print(sha1($_POST['password']));
            $execquery=  mysqli_query($GLOBALS["___mysqli_ston"], $query);
            if(mysqli_num_rows($execquery)){
                
-                $sessid= ((isset($GLOBALS["___mysqli_ston"]) && is_object($GLOBALS["___mysqli_ston"])) ? mysqli_real_escape_string($GLOBALS["___mysqli_ston"], session_id()) : ((trigger_error("[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.", E_USER_ERROR)) ? "" : ""));
-                $hash=  ((isset($GLOBALS["___mysqli_ston"]) && is_object($GLOBALS["___mysqli_ston"])) ? mysqli_real_escape_string($GLOBALS["___mysqli_ston"], hash("sha512",$sessid.$_SERVER['HTTP_USER_AGENT'])) : ((trigger_error("[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.", E_USER_ERROR)) ? "" : ""));
+                $sessid=  mysqli_real_escape_string($GLOBALS["___mysqli_ston"], session_id()) ;
+                $hash=   mysqli_real_escape_string($GLOBALS["___mysqli_ston"], hash("sha512",$sessid.$_SERVER['HTTP_USER_AGENT'])) ;
                 $userdata = mysqli_fetch_assoc(mysqli_query($GLOBALS["___mysqli_ston"], $query));
                 $expires=time()+(15*60);
                 $query2 ="insert into active_users(user,session_id,hash,expires) values('".$userdata['id']."','".$sessid."','".$hash."',".$expires.");" ;
@@ -118,6 +119,7 @@ and open the template in the editor.
                   </div> 
                  <button type="submit" name="submitbtn" class="btn btn-primary">Login</button>
                  <a href="forgotpassword.php">  Forgot Password?</a>
+				 <div class="g-signin2" data-onsuccess="onSignIn"></div>
              </form>
                  
             </div>
@@ -127,5 +129,6 @@ and open the template in the editor.
     <script src="src/css/bootstrap-3.3.6-dist/js/jquery-1.11.3.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="src/css/bootstrap-3.3.6-dist/js/bootstrap.min.js"></script>
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
     </body>
 </html>

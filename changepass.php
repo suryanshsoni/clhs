@@ -25,9 +25,9 @@ if(isset($_POST['cancelchangepwdbtn'])){
                 <form id="loginform" class="  col-lg-4" method="post" action="">
 <?php
 if(isset($_POST['changepwdbtn'])){
-    $old_password=  sha1(((isset($GLOBALS["___mysqli_ston"]) && is_object($GLOBALS["___mysqli_ston"])) ? mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['oldpassword']) : ((trigger_error("[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.", E_USER_ERROR)) ? "" : "")));
-    $new_password=  sha1(((isset($GLOBALS["___mysqli_ston"]) && is_object($GLOBALS["___mysqli_ston"])) ? mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['newpassword']) : ((trigger_error("[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.", E_USER_ERROR)) ? "" : "")));
-    $repeat_password=sha1(((isset($GLOBALS["___mysqli_ston"]) && is_object($GLOBALS["___mysqli_ston"])) ? mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['repeatpassword']) : ((trigger_error("[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.", E_USER_ERROR)) ? "" : "")));
+    $old_password=  sha1( mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['oldpassword']) );
+    $new_password=  sha1( mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['newpassword']) );
+    $repeat_password=sha1( mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['repeatpassword']) );
     
     if($new_password!=$repeat_password || $new_password==""||$old_password!=$curr_password){
          if($new_password==""){

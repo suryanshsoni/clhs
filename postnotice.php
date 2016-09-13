@@ -6,7 +6,7 @@ if(isset($_POST['submitnoticebtn'])){
     $issuer=$_POST['issuer'];
     $content=$_POST['content'];
     $date=$_POST['date'];
-    $displayat=  ((isset($GLOBALS["___mysqli_ston"]) && is_object($GLOBALS["___mysqli_ston"])) ? mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['displayat']) : ((trigger_error("[MySQLConverterToo] Fix the mysql_escape_string() call! This code does not work.", E_USER_ERROR)) ? "" : ""));
+    $displayat=   mysqli_real_escape_string($GLOBALS["___mysqli_ston"], $_POST['displayat']) ;
     //echo nl2br($_POST['content']);
     $query="insert into notices(title,date,issuer,content,displayat) values('".$title."','".$date."','".$issuer."','".$content."',".$displayat.");";
     //echo $query;

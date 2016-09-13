@@ -17,7 +17,7 @@ function isloggedin(){
    //print($query);
    $exec_query=  mysqli_query($GLOBALS["___mysqli_ston"], $query);
    if($exec_query===false)
-       print "Error is ".((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false));
+       print "Error is ".(($___mysqli_res = mysqli_connect_error()));
    if(mysqli_num_rows($exec_query)){
        $data=  mysqli_fetch_assoc($exec_query);
       return $data['user'];
@@ -41,6 +41,7 @@ function getuser(){
     $user=  isloggedin();
     if($user){
     $query=mysqli_query($GLOBALS["___mysqli_ston"], "select name,password from users where id=".(int) $user.";");
+    //print $query;    
     return mysqli_fetch_assoc($query);
     
     }
@@ -50,13 +51,37 @@ function getuser(){
     
 }
 
-function getstudent($name){
-   $query= "select *from students where name like '%".$name."%' or roomno like '%".$name."%';";
+function getplayer($name){
+   $query= "select * from players where p_name like '%".$name."%';";
+   
    //echo $query;
    $query=mysqli_query($GLOBALS["___mysqli_ston"], $query);
    return $query;
 }
 
+function getground($name){
+   $query= "select * from grounds where g_name like '%".$name."%';";
+   
+   //echo $query;
+   $query=mysqli_query($GLOBALS["___mysqli_ston"], $query);
+   return $query;
+}
+
+function getumpire($name){
+   $query= "select * from umpires where u_name like '%".$name."%';";
+   
+   //echo $query;
+   $query=mysqli_query($GLOBALS["___mysqli_ston"], $query);
+   return $query;
+}
+
+function getleague($name){
+   $query= "select * from leagues where l_name like '%".$name."%';";
+   
+   //echo $query;
+   $query=mysqli_query($GLOBALS["___mysqli_ston"], $query);
+   return $query;
+}
 function generateRandomString($length) {
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $charactersLength = strlen($characters);

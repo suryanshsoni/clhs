@@ -25,7 +25,7 @@ if(isset($_POST['goback'])){
                           $query="update complaints set status='processed' where id='".$ids[$i]."';";
                           //echo $query;
                          if(!mysqli_query($GLOBALS["___mysqli_ston"], $query))
-                              echo ((is_object($GLOBALS["___mysqli_ston"])) ? mysqli_error($GLOBALS["___mysqli_ston"]) : (($___mysqli_res = mysqli_connect_error()) ? $___mysqli_res : false));
+                              echo (($___mysqli_res = mysqli_connect_error()));
                           
                           
                               

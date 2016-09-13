@@ -25,7 +25,15 @@ and open the template in the editor.
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
    <link rel="icon" type="image/ico" href="favicon.ico">
    <!--MDL-->
-   <link rel="stylesheet" href="src/css/mdl/material.min.css">
+   <!--Import Google Icon Font-->
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--google materialze commented
+      <!--Import materialize.css
+      <link type="text/css" rel="stylesheet" href="src/materialize/css/materialize.min.css"  media="screen,projection"/>
+      will be used later-->
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" href="src/css/mdl/material.min.css">
 
 
     <!-- Bootstrap -->
@@ -33,6 +41,7 @@ and open the template in the editor.
     <link href="src/css/bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="src/css/bootstrap-3.3.6-dist/css/bootstrap-next.css" rel="stylesheet">
     <link href="src/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+ 
     <title>
       League Administrator
     </title>
@@ -166,26 +175,26 @@ and open the template in the editor.
                           <div class="panel-heading"><h3 class="panel-title">Leagues</h3></div>
      <div class="panel-body dashboard ">
         <div class=" col-lg-4">
-                                         <a href="admin_home.php?option=addaccount">
+                                         <a href="admin_home.php?option=addleague">
                                          <div class=" well ">
 
                                          <img src="resources/create-account.png" alt=""/>
                                          </div>
-                                          <button  class="btn btn-primary">Create Series</button></a>
+                                          <button  class="btn btn-primary">Create League</button></a>
                                        </div>
                                      <div class="col-lg-4">
-                                         <a href="admin_home.php?option=deleteaccount">
+                                         <a href="admin_home.php?option=deleteleague">
                                          <div class="well ">
                                              <img src="resources/delete-account.png" alt=""/>
                                              </div>
-                                         <button  class="btn btn-primary">Delete series</button></a>
+                                         <button  class="btn btn-primary">Delete League</button></a>
                                      </div>
                                      <div class="col-lg-4">
-                                         <a href="admin_home.php?option=recoverpassword">
+                                         <a href="admin_home.php?option=updateleague">
                                          <div class="well" >
                                              <img src="resources/change-password.png" alt=""/>
                                              </div>
-                                             <button class="btn btn-primary"><text style="font-size:12px;">Update Series</text></button></a>
+                                             <button class="btn btn-primary"><text style="font-size:12px;">Update League</text></button></a>
                                      </div>
      </div>
                       </div>
@@ -312,7 +321,7 @@ and open the template in the editor.
                         <div class="panel-heading"><h3 class="panel-title">Grounds</h3></div>
    <div class="panel-body dashboard ">
       <div class=" col-lg-4">
-                                       <a href="admin_home.php?option=addaccount">
+                                       <a href="admin_home.php?option=addground">
                                        <div class=" well ">
 
                                        <img src="resources/create-account.png" alt=""/>
@@ -320,14 +329,14 @@ and open the template in the editor.
                                         <button  class="btn btn-primary">Add Ground</button></a>
                                      </div>
                                    <div class="col-lg-4">
-                                       <a href="admin_home.php?option=deleteaccount">
+                                       <a href="admin_home.php?option=deleteground">
                                        <div class="well ">
                                            <img src="resources/delete-account.png" alt=""/>
                                            </div>
                                        <button  class="btn btn-primary">Delete Ground</button></a>
                                    </div>
                                    <div class="col-lg-4">
-                                       <a href="admin_home.php?option=recoverpassword">
+                                       <a href="admin_home.php?option=updateground">
                                        <div class="well" >
                                            <img src="resources/change-password.png" alt=""/>
                                            </div>
@@ -343,7 +352,7 @@ and open the template in the editor.
                    <div class="panel-heading"><h3 class="panel-title">Umpires</h3></div>
 <div class="panel-body dashboard ">
  <div class=" col-lg-4">
-                                  <a href="admin_home.php?option=addaccount">
+                                  <a href="admin_home.php?option=addumpire">
                                   <div class=" well ">
 
                                   <img src="resources/create-account.png" alt=""/>
@@ -351,14 +360,14 @@ and open the template in the editor.
                                    <button  class="btn btn-primary">Add Umpire</button></a>
                                 </div>
                               <div class="col-lg-4">
-                                  <a href="admin_home.php?option=deleteaccount">
+                                  <a href="admin_home.php?option=deleteumpire">
                                   <div class="well ">
                                       <img src="resources/delete-account.png" alt=""/>
                                       </div>
                                   <button  class="btn btn-primary">Delete Umpire</button></a>
                               </div>
                               <div class="col-lg-4">
-                                  <a href="admin_home.php?option=recoverpassword">
+                                  <a href="admin_home.php?option=updateumpire">
                                   <div class="well" >
                                       <img src="resources/change-password.png" alt=""/>
                                       </div>
@@ -379,7 +388,7 @@ and open the template in the editor.
             switch($opt){
             case 'logout':
             {
-
+					
                     $id=  isloggedin();
                     $query="delete from active_users where user=".$id.";";
                     //print("<br><br><br><br><br><br><br>".$query);
@@ -415,8 +424,8 @@ and open the template in the editor.
             case 'removeplayer':{
                     require 'deleteplayer.php';
             }break;
-            case 'addaccount':{
-                    require 'searchplayer.php';
+            case 'addground':{
+                    require 'addground.php';
             } break;
             case 'createaccount':{
                     require 'addaccount.php';
@@ -446,6 +455,48 @@ and open the template in the editor.
             }break;
             case 'processrcomplaint':{
                     require 'viewmcomplaint.php';
+            }break;
+             case 'updateground':{
+                    require 'searchground.php';
+            }break;
+             case 'deleteground':{
+                    require 'searchground.php';
+            }break;
+            case 'removeground':{
+                    require 'deleteground.php';
+            }break;
+            case 'modifyground':{
+                    require 'modifyground.php';
+            }break;
+            case 'addumpire':{
+                    require 'addumpire.php';
+            } break;
+             case 'updateumpire':{
+                    require 'searchumpire.php';
+            }break;
+             case 'deleteumpire':{
+                    require 'searchumpire.php';
+            }break;
+            case 'removeumpire':{
+                    require 'deleteumpire.php';
+            }break;
+            case 'modifyumpire':{
+                    require 'modifyumpire.php';
+            }break;
+            case 'addleague':{
+                    require 'addleague.php';
+            } break;
+             case 'updateleague':{
+                    require 'searchleague.php';
+            }break;
+             case 'deleteleague':{
+                    require 'searchleague.php';
+            }break;
+            case 'removeleague':{
+                    require 'deleteleague.php';
+            }break;
+            case 'modifyleague':{
+                    require 'modifyleague.php';
             }break;
         }
         }
