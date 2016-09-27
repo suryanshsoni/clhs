@@ -23,24 +23,7 @@ and open the template in the editor.
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-   <link rel="icon" type="image/ico" href="favicon.ico">
-   <!--MDL-->
-   <!--Import Google Icon Font-->
-      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <!--google materialze commented
-      <!--Import materialize.css
-      <link type="text/css" rel="stylesheet" href="src/materialize/css/materialize.min.css"  media="screen,projection"/>
-      will be used later-->
-      <!--Let browser know website is optimized for mobile-->
-      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <link rel="stylesheet" href="src/css/mdl/material.min.css">
-
-
-    <!-- Bootstrap -->
-
-    <link href="src/css/bootstrap-3.3.6-dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="src/css/bootstrap-3.3.6-dist/css/bootstrap-next.css" rel="stylesheet">
-    <link href="src/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <?php require 'header.php'; ?>
  
     <title>
       League Administrator
@@ -207,23 +190,16 @@ and open the template in the editor.
                      <div class="panel-heading"><h3 class="panel-title">Teams</h3></div>
      <div class="panel-body dashboard ">
         <div class="row-fluid">
-                                  <div class=" col-lg-4">
-                                    <a href="admin_home.php?option=addaccount">
-                                    <div class=" well ">
-
-                                    <img src="resources/create-account.png" alt=""/>
-                                    </div>
-                                     <button  class="btn btn-primary">Upload Teams</button></a>
-                                  </div>
+                                  
                                 <div class="col-lg-4">
-                                    <a href="admin_home.php?option=deleteaccount">
+                                    <a href="admin_home.php?option=addteam">
                                     <div class="well ">
                                         <img src="resources/delete-account.png" alt=""/>
                                         </div>
                                     <button  class="btn btn-primary">Create Team</button></a>
                                 </div>
                                 <div class="col-lg-4">
-                                    <a href="admin_home.php?option=recoverpassword">
+                                    <a href="admin_home.php?option=updateteam">
                                     <div class="well" >
                                         <img src="resources/change-password.png" alt=""/>
                                         </div>
@@ -332,7 +308,7 @@ and open the template in the editor.
                                        <a href="admin_home.php?option=deleteground">
                                        <div class="well ">
                                            <img src="resources/delete-account.png" alt=""/>
-                                           </div>
+                                        </div>
                                        <button  class="btn btn-primary">Delete Ground</button></a>
                                    </div>
                                    <div class="col-lg-4">
@@ -497,6 +473,21 @@ and open the template in the editor.
             }break;
             case 'modifyleague':{
                     require 'modifyleague.php';
+            }break;
+            case 'addteam':{
+                    require 'addteam.php';
+            }break;
+            case 'updateteam':{
+                    require 'searchteam.php';
+            }break;
+             case 'deleteteam':{
+                    require 'searchteam.php';
+            }break;
+            case 'removeteam':{
+                    require 'deleteteam.php';
+            }break;
+            case 'modifyteam':{
+                    require 'modifyteam.php';
             }break;
         }
         }

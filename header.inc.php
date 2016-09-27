@@ -2,6 +2,8 @@
 session_start();
 require 'config.php';
 
+$GLOBALS["leagueid"]=1;
+
 $user=  isloggedin();
 if($user){
     $expires=  time()+60*15;
@@ -47,12 +49,18 @@ function getuser(){
     }
     else
         return false;
-    
-    
-}
+ }
 
 function getplayer($name){
    $query= "select * from players where p_name like '%".$name."%';";
+   
+   //echo $query;
+   $query=mysqli_query($GLOBALS["___mysqli_ston"], $query);
+   return $query;
+}
+
+function getteam($name,$league){
+   $query= "select * from teams where t_name like '%".$name."%' and t_league_id=".$league.";";
    
    //echo $query;
    $query=mysqli_query($GLOBALS["___mysqli_ston"], $query);

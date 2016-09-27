@@ -52,12 +52,12 @@ if(isset($_POST['canceladdplayerbtn'])){
 
                     <div class="form-group">
                         <label for="title" class="control-label">Enter Name</label>
-                        <input type="text" name="name" class="form-control">
+                        <input type="text" required name="name" class="form-control">
                     </div>
 
                     <div class="form-group">
                         <label for="date" class="control-label">Enter Date Of Birth</label>
-                        <input type="date" name="date" class="form-control">
+                        <input type="date" required name="date" class="form-control">
                     </div>
 
                      </div>
